@@ -1,0 +1,112 @@
+<div class="container">
+    <form [formGroup]="gestionarCompraComicForm">
+        <h1>Gestionar Comic</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="direccionPro">direccion:</label>
+                <input type="text" class="form-control" id="direccionPro" formControlName="direccion" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" maxlength="50">
+                <div *ngIf="submitted && f.direccion.errors">
+                    <span class="text-danger" *ngIf="f.direccion.errors.required">Campo requerido.</span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label for="fechaCreacion">fecha:</label>
+                <input type="text" class="form-control" id="fechaCreacion" formControlName="fechaCreacion">
+                <div *ngIf="submitted && f.fechaCreacion.errors">
+                    <span class="text-danger" *ngIf="f.fechaCreacion.errors.required">Campo requerido.</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="monto">valor Credito:</label>
+                <input type="number" class="form-control" id="monto" formControlName="montoCredito">
+                <div *ngIf="submitted && f.montoCredito.errors">
+                    <span class="text-danger" *ngIf="f.montoCredito.errors.required">Campo requerido.</span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="estadoEnum">estado</label>
+                    <select class="form-control" id="estadoEnum" formControlName="estadoEnum">
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="INACTIVO">INACTIVO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="nomper">nombre persona:</label>
+                <input type="text" class="form-control" id="nomper" formControlName="persona">
+                <div *ngIf="submitted && f.persona.errors">
+                    <span class="text-danger" *ngIf="f.persona.errors.required">Campo requerido.</span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="idper">id persona</label>
+                    <input type="text" class="form-control" id="idper" formControlName="idPersona">
+                    <div *ngIf="submitted && f.idPersona.errors">
+                        <span class="text-danger" *ngIf="f.idPersona.errors.required">Campo requerido.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <div class="row ">
+            <div class="col-6 ">
+            </div>
+            <div class="col-6 text-right ">
+                <button type="button " class="btn btn-primary " (click)="crearActualizarProveedor() ">Crear/Editar</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row " [hidden]="listaProveedores.length===0 ">
+            <div class="col-12 ">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col ">#</th>
+                            <th scope="col ">Direccion</th>
+                            <th scope="col ">fecha</th>
+                            <th scope="col ">Estado</th>
+                            <th scope="col ">Credito</th>
+                            <th scope="col ">Persona</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--date:"MM/dd/yy "
+                        | uppercase-->
+                        <tr *ngFor="let pro of listaProveedores;let i=index; ">
+                            <th scope="row ">{{pro.id}}</th>
+                            <td>{{pro.direccion | uppercase }}</td>
+                            <td>{{pro.fechaCreacion }}</td>
+                            <td>{{pro.estadoEnum | lowercase }}</td>
+                            <td>{{pro.montoCredito | number: '.2'}}</td>
+                            <td>{{pro.persona }}</td>
+                            <td>
+                                <i class="fas fa-search 2x ml-1 " (click)="consultarComic(pro.id) " title="Consultar "></i>
+                                <i class="fas fa-pencil-alt 2x ml-1 " (click)="editarProveedor(pro) " title="Editar "></i>
+                                <i class="far fa-times-circle 2x ml-1 " (click)="eliminarComic(pro.id) " title="Eliminar "></i>
+                                <i class="fas fa-pencil-alt 2x ml-1 " (click)="modificarDireccionProveedor(pro.id, pro.direccion) " title="EditarDireccion "></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
