@@ -1,0 +1,46 @@
+<div class="container">
+    <form [formGroup]="consultarComprarComicForm">
+        <h1>Gestionar Comic</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="direccionPro">direccion:</label>
+                <input type="text" class="form-control" id="direccionPro" formControlName="direccion" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" maxlength="50">
+            </div>
+
+            <div class="col-6">
+                <label for="fechaCreacion">fecha:</label>
+                <input type="text" class="form-control" id="fechaCreacion" formControlName="fechaCreacion">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <label for="monto">valor Credito:</label>
+                <input type="number" class="form-control" id="monto" formControlName="montoCredito">
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="estadoEnum">estado</label>
+                    <select class="form-control" id="estadoEnum" formControlName="estadoEnum">
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="INACTIVO">INACTIVO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="irAtras()">Volver</button>
+            </div>
+        </div>
+    </form>
+</div>
